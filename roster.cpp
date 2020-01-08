@@ -28,13 +28,17 @@ using namespace std;
  * 
  */
 
+
+// set number of student records to process
 int numStudents = 5;
 
+// initialize storage arrays
 Roster::Roster(){
     Student* classRosterArray[5];
     string parsedStudentData[5][9];
 }
 
+// destructor
 Roster::~Roster(){
     for (int i = 0; i < numStudents; ++i) {
         if (classRosterArray[i] != nullptr) {
@@ -44,7 +48,7 @@ Roster::~Roster(){
     }
 }
 
-
+// initial student data
 const string studentData[] =
 {"A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
 "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
@@ -53,6 +57,7 @@ const string studentData[] =
 "A5,Richard,Green,rgre142@wgu.edu,35,10,20,30,SOFTWARE"};
 
 
+// parse student data into array
 void Roster::parseStudentData(){
     string buffer;
     int token;
@@ -76,8 +81,8 @@ void Roster::parseStudentData(){
 
 
 
-
-void Roster::populateRosterArray() {    
+// create class-specific objects from student data in array
+void Roster::populateRosterArray() {
     Degree degree;
     for (int i = 0; i < numStudents; ++i) {
         if (parsedStudentData[i][8] == "NETWORK"){
@@ -106,7 +111,7 @@ void Roster::populateRosterArray() {
 }
 
 
-
+// add student data to roster
 void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degree){
     int rosterIndex = stoi(studentID.substr(1)) - 1;
     int daysInCourse[3] = {daysInCourse1, daysInCourse2, daysInCourse3};
@@ -129,7 +134,7 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 }
 
 
-
+// remove student data from roster
 void Roster::remove(string ID){
     bool removed = false;
     for (int i = 0; i < numStudents; ++i) {
@@ -145,12 +150,15 @@ void Roster::remove(string ID){
     }
 }
 
+// print all student data
 void Roster::printAll(){
     for (int i = 0; i < numStudents; ++i) {
         classRosterArray[i]->print();
     }
 }
 
+
+// print avg days in course
 void Roster::printAverageDaysInCourse(string studentID) {
     int studentIndex;
     for (int i = 0; i < numStudents; ++i) {
@@ -165,6 +173,7 @@ void Roster::printAverageDaysInCourse(string studentID) {
     cout << "Average days in course for Student " << studentID << ": " << avgDays << endl;
 }
 
+// print invalid emails
 void Roster::printInvalidEmails() {
     for (int i = 0; i < numStudents; ++i) {
         string email = classRosterArray[i]->getEmail();
@@ -187,6 +196,7 @@ void Roster::printInvalidEmails() {
     }
 }
 
+// print by degree program
 void Roster::printByDegreeProgram(Degree degree) {
     for (int i = 0; i < numStudents; ++i) {
         if (degree == classRosterArray[i]->getDegreeProgram()) {
@@ -196,9 +206,9 @@ void Roster::printByDegreeProgram(Degree degree) {
 }
 
 
-
+// output data to screen based on instructions
 int main() {
-    cout << "Scripting and Programming - Applications – C867" << endl;
+    cout << "Scripting and Programming - Applications" << endl;
     cout << "C++" << endl;
     cout << "Student ID:#000986762" << endl;
     cout << "Richard Green" << endl;
